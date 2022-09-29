@@ -35,11 +35,24 @@
 \bibliography{refs} % Entries are in the refs.bib file
 
 % Appendix
-% \newpage
-% \appendix
-% % A-1, A-2, ..., B-1, B-2, B-3, ...
-% \renewcommand{\thesubsection}{\Alph{subsection}}
-% \break
-% \renewcommand{\thepage}{\thesection-\arabic{page}}
+\newpage
+\section*{\appendixname}
+\addcontentsline{toc}{section}{\appendixname}
+\clearpage
+% page numbering: A-1, A-2, ..., B-1, B-2, B-3, ...
+\renewcommand{\thesubsection}{\Alph{subsection}}
+\renewcommand{\thepage}{\thesubsection-\arabic{page}}
+
+\clearpage
+\subsection{title1}
+\setcounter{page}{1}
+dbfkjsdbfk sdnfkjsdkfbjksadf
+\clearpage
+asdjisadfihsdhf
+
+\clearpage
+\subsection{title2}
+\setcounter{page}{1}
+sdnfkjsdkfbjksadf
 
 \end{document}
