@@ -1,0 +1,14 @@
+*.DS_Store
+*.vscode
+temp
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.lof
+*.log
+*.lot
+*.xml
+*.out
+*.gz
+*.toc
