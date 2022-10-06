@@ -1,25 +1,40 @@
 \documentclass{article}
 \usepackage[english]{babel}
-% Page layout
 \usepackage[b5paper]{geometry} % size and margins
-% Tools
 \usepackage{titling} % titlingpage
 \usepackage{hyperref} % enable links
+\usepackage{graphicx} % figures
+\usepackage{minted} % code
+\usepackage{float} % float placement
+\usepackage{xcolor} % custom colors
+\usepackage{tikz} % graph drawing
+\usetikzlibrary{positioning, matrix, arrows.meta, bending}
 
-
-
+% Project Structure Setup
+\graphicspath{{./assets/figures/}}
 
 % Document Setup
 \setlength{\parindent}{0em}
 \setlength{\parskip}{0.8em}
+% Tables
+\renewcommand{\arraystretch}{1.15}
+% Figure and code (Listing) default placement
+\AtBeginDocument{\floatplacement{figure}{H}}
+\AtBeginDocument{\floatplacement{table}{H}}
+\AtBeginDocument{\floatplacement{listing}{H}}
 
-% Ref Names
+% autoref Names
 \addto\extrasenglish{
     \def\sectionautorefname{Section}
     \def\equationautorefname{Equation}
     \def\figureautorefname{Figure}
     \def\tableautorefname{Table}
-    \renewcommand{\appendixname}{Appendix}
+    \def\listingautorefname{Listing}
+    \renewcommand{\appendixname}{Appendices}
+    \def\appendixautorefname{Appendix}
+    % subsections same as section
+    \let\subsectionautorefname\sectionautorefname
+    \let\subsubsectionautorefname\sectionautorefname
 }
 
 % Link Colors
@@ -29,4 +44,71 @@
     citecolor=blue,
     filecolor=black,
     urlcolor=blue
+}
+
+% Custom Appendices
+\newcommand{\addappendix}[1]{
+    \clearpage
+    \subsection{#1}\label{apx:#1}
+    \setcounter{page}{1}
+    \input{Appendices/#1.tex}
+}
+\newenvironment{appendices}
+{
+    \newpage
+    \section*{\appendixname}
+    \addcontentsline{toc}{section}{\appendixname}
+    \setcounter{subsection}{0}
+    \clearpage
+    % page numbering: A-1, A-2, ..., B-1, B-2, B-3, ...
+    \renewcommand{\thesubsection}{\Alph{subsection}}
+    \renewcommand{\thepage}{\thesubsection-\arabic{page}}
+}
+{
+    \clearpage
+    \renewcommand{\thesubsection}{\arabic{subsection}}
+    \renewcommand{\thepage}{\arabic{page}}
+}
+
+
+
+% Graph Drawing
+\tikzset{
+% nodes
+node/.style={
+        circle,
+        draw,
+        thick,
+        inner sep=0pt,
+        align=center,
+        minimum size=8mm,
+    },
+% Lines
+edge/.style={
+-{Stealth[length=2mm, width=3mm]},
+thick,
+},
+line/.style={
+        -,
+        thick,
+    },
+cut/.style={
+-{Stealth[length=1mm, width=2mm]},
+thin,
+dotted,
+},
+% Line Labels
+weight/.style={
+        midway,
+        circle,
+        inner sep=1pt,
+        font=\normalsize,
+        fill=white,
+    },
+% Array Styles
+array/.style={
+        matrix of nodes,
+        nodes={draw, scale=1, minimum size=7mm, font=\Large,},
+        column sep=-\pgflinewidth,
+    },
 }

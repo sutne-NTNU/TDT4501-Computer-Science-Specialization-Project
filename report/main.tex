@@ -1,10 +1,11 @@
 \input{setup.tex}
+% \graphicspath{ {asstes/} }
 \begin{document}
 
 % Frontpage
 \begin{titlingpage}
     \title{
-        \textbf{Mixed Goods and MMS}\\
+        \textbf{Mixed Goods}\\
         \textit{\normalsize{TDT4501 - Computer Science, Specialization Project}}\\
     }
     \author{Sivert Utne}
@@ -19,13 +20,16 @@
 % Table of Contents
 \newpage
 \tableofcontents
+\clearpage
 \listoffigures
 \listoftables
+\listoflistings
 
 % Main Matter
 \newpage
 \pagenumbering{arabic}  % 1, 2, 3, 4, 5, ...
-\include{MainMatter/introduction}
+\include{MainMatter/Introduction}
+\include{MainMatter/Preliminaries}
 \include{MainMatter/Conclusions}
 
 % Bibliography
@@ -35,24 +39,6 @@
 \bibliography{refs} % Entries are in the refs.bib file
 
 % Appendix
-\newpage
-\section*{\appendixname}
-\addcontentsline{toc}{section}{\appendixname}
-\clearpage
-% page numbering: A-1, A-2, ..., B-1, B-2, B-3, ...
-\renewcommand{\thesubsection}{\Alph{subsection}}
-\renewcommand{\thepage}{\thesubsection-\arabic{page}}
-
-\clearpage
-\subsection{title1}
-\setcounter{page}{1}
-dbfkjsdbfk sdnfkjsdkfbjksadf
-\clearpage
-asdjisadfihsdhf
-
-\clearpage
-\subsection{title2}
-\setcounter{page}{1}
-sdnfkjsdkfbjksadf
+\include{Appendices/Appendices.tex}
 
 \end{document}
