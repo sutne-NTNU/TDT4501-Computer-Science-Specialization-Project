@@ -1,43 +1,46 @@
-\documentclass{article}
+\documentclass{report}
 \usepackage[english]{babel}
 \usepackage[b5paper]{geometry} % size and margins
+\usepackage{etoolbox} % patching and customizing commands
 \usepackage{titling} % titlingpage
-\usepackage{hyperref} % enable links
 \usepackage{graphicx} % figures
 \usepackage{minted} % code
 \usepackage{float} % float placement
-\usepackage{xcolor} % custom colors
 \usepackage{tikz} % graph drawing
-\usepackage{etoolbox} % custom appendix formatting
 \usepackage{pdfpages} % insert pdf documents
-\usetikzlibrary{positioning, matrix, arrows.meta, bending}
-
-% Project Structure Setup
-\graphicspath{{./assets/figures/}}
+\usepackage{hyperref} % enable links
 
 % Document Setup
-\setlength{\parindent}{0em}
-\setlength{\parskip}{0.8em}
-% Tables
-\renewcommand{\arraystretch}{1.15}
-% Figure and code (Listing) default placement
+\setlength{\parindent}{0em} % Indentation at the beginning of paragraphs
+\setlength{\parskip}{0.8em} % Vertical space between paragraphs
+\renewcommand{\arraystretch}{1.15} % Vertical space between table rows
+
+% Floats default placement
 \AtBeginDocument{\floatplacement{figure}{H}}
 \AtBeginDocument{\floatplacement{table}{H}}
+\AtBeginDocument{\floatplacement{equation}{H}}
 \AtBeginDocument{\floatplacement{listing}{H}}
 
 % autoref Names
 \addto\extrasenglish{
-    \renewcommand{\sectionautorefname}{Section}
-    \renewcommand{\subsectionautorefname}{\sectionautorefname}
-    \renewcommand{\subsubsectionautorefname}{\sectionautorefname}
-    \renewcommand{\figureautorefname}{Figure}
-    \renewcommand{\tableautorefname}{Table}
-    \renewcommand{\equationautorefname}{Equation}
-    \renewcommand{\refname}{Bibliography}
-    \renewcommand{\appendixname}{Appendices}
-    \renewcommand{\appendixautorefname}{Appendix}
+    \def\chapterautorefname{Chapter}
+    \def\sectionautorefname{Section}
+    \def\subsectionautorefname{\sectionautorefname}
+    \def\subsubsectionautorefname{\sectionautorefname}
+    \def\figureautorefname{Figure}
+    \def\tableautorefname{Table}
+    \def\equationautorefname{Equation}
     \def\listingautorefname{Listing}
+    \def\bibname{Bibliography}
+    \def\appendixname{Appendix}
+    \def\appendixautorefname{Appendix}
 }
+
+% Listing numbering to [Chapter].[Listing]
+\makeatletter
+\renewcommand*{\thelisting}{\thechapter.\arabic{listing}}
+\@addtoreset{listing}{chapter} % reset listing counter at each chapter
+\makeatother
 
 % Link Colors
 \hypersetup{
@@ -48,31 +51,22 @@
     urlcolor=blue
 }
 
-\appto\appendix{
-    \clearpage
-    \addcontentsline{toc}{section}{\appendixname}
-    \section*{\appendixname}
-}
-
-% Title, Page start, Page end, Filename
-\newcommand{\inputpdf}[4]
-{
-    \includepdf[
-        width=\textwidth,
-        frame,
-        pagecommand={\section{#1}\label{pdf:#1}},
-        pages={#2}
-    ]{#4}
-    \includepdf[
-        width=\textwidth,
-        frame,
+% Custom PDF insertion
+\newcommand{\inputpdf}[4]{
+    % #1 = title/description
+    % #2 = page-nr start
+    % #3 = page-nr end
+    % #4 = filename/path
+    \chapter{#1}\label{pdf:#1}
+    \includepdf[width=\textwidth,frame,
         pagecommand={},
-        pages={{\number\numexpr#2 + 1\relax}-#3}
+        pages={#2-#3}
     ]{#4}
 }
 
 % Graph Drawing
-\tikzset{
+\usetikzlibrary{positioning, matrix, arrows.meta, bending}
+\tikzset{%
 node/.style={circle,draw,thick,inner sep=0pt,align=center,minimum size=8mm},
 edge/.style={-{Stealth[length=2mm, width=3mm]},thick},
 line/.style={-,thick},

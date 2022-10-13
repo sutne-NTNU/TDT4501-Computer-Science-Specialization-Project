@@ -1,5 +1,8 @@
 \input{setup.tex}
 
+% Project Structure Setup
+\graphicspath{{./assets/figures/}}
+
 \begin{document}
 % Frontpage
 \begin{titlingpage}
@@ -28,16 +31,16 @@
 \newpage
 \pagenumbering{arabic}  % 1, 2, 3, 4, 5, ...
 \include{content/main/Introduction}
-\include{content/main/Preliminaries}
 \include{content/main/Conclusions}
 
 % Bibliography
 \newpage
-\addcontentsline{toc}{section}{References}
+\addcontentsline{toc}{chapter}{\bibname}
 \bibliographystyle{plain}
 \bibliography{refs} % Entries are in the refs.bib file
 
 % Appendix
+\clearpage
 \appendix % Section 1, 2, ... -> Appendix A, B, ...
 \input{content/appendix/Title1.tex}
 \input{content/appendix/Title2.tex}
