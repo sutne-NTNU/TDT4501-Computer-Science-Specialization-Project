@@ -1,7 +1,6 @@
 \input{setup.tex}
-% \graphicspath{ {asstes/} }
-\begin{document}
 
+\begin{document}
 % Frontpage
 \begin{titlingpage}
     \title{
@@ -15,7 +14,7 @@
 
 % Front Matter
 \pagenumbering{roman}   % i, ii, iii, iv, v, ...
-\include{FrontMatter/Abstract}
+\include{content/front/Abstract}
 
 % Table of Contents
 \newpage
@@ -28,9 +27,9 @@
 % Main Matter
 \newpage
 \pagenumbering{arabic}  % 1, 2, 3, 4, 5, ...
-\include{MainMatter/Introduction}
-\include{MainMatter/Preliminaries}
-\include{MainMatter/Conclusions}
+\include{content/main/Introduction}
+\include{content/main/Preliminaries}
+\include{content/main/Conclusions}
 
 % Bibliography
 \newpage
@@ -39,6 +38,8 @@
 \bibliography{refs} % Entries are in the refs.bib file
 
 % Appendix
-\include{Appendices/Appendices.tex}
-
+\appendix % Section 1, 2, ... -> Appendix A, B, ...
+\input{content/appendix/Title1.tex}
+\input{content/appendix/Title2.tex}
+\inputpdf{PDF}{5}{6}{content/appendix/appendix.pdf}
 \end{document}
