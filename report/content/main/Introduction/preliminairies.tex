@@ -1,0 +1,35 @@
+\section{Preliminaries}\label{sec:preliminaries}
+
+Preliminaries which also show \autoref{fig:my test graph}.
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \node[node] (a) {a};
+        \node[node] (b) [right = of a] {b};
+        \node[node] (c) [right = of b] {c};
+        \node[node] (d) [below = of a] {d};
+        \node[node] (e) [right = of d] {e};
+        \node[node] (f) [right = of e] {f};
+        \node[node] (g) [below = of d] {g};
+        \node[node] (h) [right = of g] {h};
+        \node[node] (i) [right = of h] {i};
+        \draw[edge] (a) -- (b);
+        \draw[edge] (a) -- (d);
+        \draw[edge] (b) -- (c);
+        \draw[edge] (c) -- (f);
+        \draw[edge] (d) -- (e);
+        \draw[edge] (d) -- (h);
+        \draw[edge] (e) -- (b);
+        \draw[edge] (e) -- (g);
+        \draw[edge] (f) -- (i);
+        \draw[edge] (g) -- (h);
+        \draw[edge] (h) -- (f);
+        \draw[edge] (e) -- (i);
+    \end{tikzpicture}
+    \caption{Just a graph}
+    \label{fig:my test graph}
+\end{figure}
+
+
+And also check out the figure in \autoref{fig:appendix-figure}.

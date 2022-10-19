@@ -1,9 +1,9 @@
 \input{setup.tex}
-
-% Project Structure Setup
 \graphicspath{{./assets/figures/}}
-
 \begin{document}
+
+
+
 % Frontpage
 \begin{titlingpage}
     \title{
@@ -22,16 +22,16 @@
 % Table of Contents
 \newpage
 \tableofcontents
-\clearpage
-\listoffigures
-\listoftables
-\listoflistings
+% \listoffigures
+% \listoftables
+% \listoflistings
 
 % Main Matter
 \newpage
 \pagenumbering{arabic}  % 1, 2, 3, 4, 5, ...
-\include{content/main/Introduction}
-\include{content/main/Conclusions}
+\include{content/main/Introduction/Introduction.tex}
+\include{content/main/Results/Results.tex}
+\include{content/main/Conclusion/Conclusion.tex}
 
 % Bibliography
 \newpage
@@ -40,9 +40,10 @@
 \bibliography{refs} % Entries are in the refs.bib file
 
 % Appendix
-\clearpage
-\appendix % Section 1, 2, ... -> Appendix A, B, ...
-\input{content/appendix/Title1.tex}
-\input{content/appendix/Title2.tex}
-\inputpdf{PDF}{5}{6}{content/appendix/appendix.pdf}
+\newpage
+\appendix % "Chapter 1, 2, ..". -> "Appendix A, B, ..."
+\include{content/appendix/Appendix.tex}
+
+
+
 \end{document}
