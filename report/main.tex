@@ -4,45 +4,37 @@
 
 
 
-% Frontpage
+% Title Page
 \begin{titlingpage}
     \title{
-        \textbf{Mixed Goods}\\
-        \textit{\normalsize{TDT4501 - Computer Science, Specialization Project}}\\
+        \Huge\textbf{On Fair Allocation of\\Mixed Goods}\\[0.8em]
+        \large{TDT4501 - Computer Science, Specialization Project}
     }
     \author{Sivert Utne}
     \date{\today}
     \maketitle
 \end{titlingpage}
 
-% Front Matter
-\pagenumbering{roman}   % i, ii, iii, iv, v, ...
+\frontmatter
+\include{content/front/Preface}
 \include{content/front/Abstract}
+\include{content/front/Contribution}
 
-% Table of Contents
-\newpage
+% Contents
 \tableofcontents
-% \listoffigures
-% \listoftables
-% \listoflistings
+\listoffigures
+\listoftables
+\listoflistings
 
-% Main Matter
-\newpage
-\pagenumbering{arabic}  % 1, 2, 3, 4, 5, ...
-\include{content/main/Introduction/Introduction.tex}
-\include{content/main/Results/Results.tex}
-\include{content/main/Conclusion/Conclusion.tex}
+\mainmatter
+\include{content/main/Introduction/Introduction}
+\include{content/main/Method/Method}
+\include{content/main/Results/Results}
+\include{content/main/Conclusion/Conclusion}
 
-% Bibliography
-\newpage
-\addcontentsline{toc}{chapter}{\bibname}
-\bibliographystyle{plain}
 \bibliography{refs} % Entries are in the refs.bib file
 
-% Appendix
-\newpage
-\appendix % "Chapter 1, 2, ..". -> "Appendix A, B, ..."
-\include{content/appendix/Appendix.tex}
+\appendix
 
 
 

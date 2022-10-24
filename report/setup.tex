@@ -1,25 +1,18 @@
 \documentclass{report}
-\usepackage[english]{babel}
+\usepackage[english]{babel} % Language
 \usepackage[b5paper]{geometry} % size and margins
 \usepackage{etoolbox} % patching and customizing commands
-\usepackage{titling} % titlingpage
 \usepackage{graphicx} % figures
-\usepackage{minted} % code
-\usepackage{float} % float placement
-\usepackage{tikz} % graph drawing
+\usepackage{titling} % titlingpage
 \usepackage{pdfpages} % insert pdf documents
+\usepackage{float} % float placement
+\usepackage{enumitem} % style lists
+\usepackage{amsmath} % math equations, alignment etc.
+\usepackage{minted} % code
+\usepackage{algorithm} % algorithms
+\usepackage{algpseudocode} % pseudo code standard
+\usepackage{tikz} % graph drawing
 \usepackage{hyperref} % enable links
-
-% Document Setup
-\setlength{\parindent}{0em} % Indentation at the beginning of paragraphs
-\setlength{\parskip}{0.8em} % Vertical space between paragraphs
-\renewcommand{\arraystretch}{1.15} % Vertical space between table rows
-
-% Floats default placement
-\AtBeginDocument{\floatplacement{figure}{H}}
-\AtBeginDocument{\floatplacement{table}{H}}
-\AtBeginDocument{\floatplacement{equation}{H}}
-\AtBeginDocument{\floatplacement{listing}{H}}
 
 % autoref Names
 \addto\extrasenglish{
@@ -31,37 +24,19 @@
     \def\tableautorefname{Table}
     \def\equationautorefname{Equation}
     \def\listingautorefname{Listing}
+    \def\algorithmautorefname{Algorithm}
     \def\bibname{Bibliography}
+    \def\refname{\bibname}
     \def\appendixname{Appendix}
-    \def\appendixautorefname{Appendix}
+    \def\appendixautorefname{\appendixname}
 }
 
-% Listing numbering to [Chapter].[Listing]
-\makeatletter
-\renewcommand*{\thelisting}{\thechapter.\arabic{listing}}
-\@addtoreset{listing}{chapter} % reset listing counter at each chapter
-\makeatother
-
-% Link Colors
-\hypersetup{
-    colorlinks,
-    linkcolor=black,
-    citecolor=blue,
-    filecolor=black,
-    urlcolor=blue
-}
-
-% Custom PDF insertion
-\newcommand{\inputpdf}[4]{
-    % #1 = title/description
-    % #2 = page-nr start
-    % #3 = page-nr end
-    % #4 = filename/path
-    \chapter{#1}\label{pdf:#1}
-    \includepdf[width=\textwidth,frame,
-        pagecommand={},
-        pages={#2-#3}
-    ]{#4}
+% Default "itemize" style
+\setlist[itemize]{
+    label=$\bullet$,
+    leftmargin=2em,
+    itemsep=0.1pt,
+    topsep=0pt
 }
 
 % Graph Drawing
@@ -74,3 +49,68 @@ cut/.style={-{Stealth[length=1mm, width=2mm]},thin,dotted},
 weight/.style={midway,circle,inner sep=1pt,font=\normalsize,fill=white},
 array/.style={matrix of nodes,nodes={draw,scale=1,minimum size=7mm,font=\Large},column sep=-\pgflinewidth},
 }
+
+% Link Colors
+\hypersetup{
+    colorlinks,
+    linkcolor=black,
+    citecolor=blue,
+    filecolor=black,
+    urlcolor=blue
+}
+
+
+
+
+
+
+% Document Setup
+\setlength{\parindent}{0em} % Indentation at the beginning of paragraphs
+\setlength{\parskip}{0.8em} % Vertical space between paragraphs
+\renewcommand{\arraystretch}{1.15} % Vertical space between table rows
+
+% default placement of float environments
+\AtBeginDocument{\floatplacement{figure}{H}}
+\AtBeginDocument{\floatplacement{table}{H}}
+\AtBeginDocument{\floatplacement{equation}{H}}
+\AtBeginDocument{\floatplacement{listing}{H}}
+
+% Listing numbering to [Chapter].[Listing]
+\makeatletter
+\renewcommand{\thelisting}{\thechapter.\arabic{listing}}
+\@addtoreset{listing}{chapter} % reset listing counter at each chapter
+\makeatother
+
+% Parts
+\newcommand{\frontmatter}{
+    \cleardoublepage
+    \pagenumbering{roman}   % i, ii, iii, iv, v, ...
+    \setcounter{secnumdepth}{-1} % disable section numbering
+}
+\newcommand{\mainmatter}{
+    \cleardoublepage
+    \pagenumbering{arabic}  % 1, 2, 3, 4, 5, ...
+    \setcounter{secnumdepth}{2} % re-enable section numbering
+}
+\pretocmd{\bibliography}{
+    \cleardoublepage
+    \addcontentsline{toc}{chapter}{\bibname}
+    \bibliographystyle{plain}
+}{}{}
+\pretocmd{\appendix}{
+    % "Chapter 1, 2, ..". -> "Appendix A, B, ..."
+    \cleardoublepage
+}{}{}
+
+% custom/uniform PDF insertion
+\newcommand{\inputpdf}[4]{
+    % #1 = filename/path
+    % #2 = page-nr start
+    % #3 = page-nr end
+    \includepdf[
+        width=\textwidth,frame,
+        pagecommand={},
+        pages={#2-#3}
+    ]{#1}
+}
+

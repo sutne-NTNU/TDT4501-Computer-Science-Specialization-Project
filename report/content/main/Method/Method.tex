@@ -1,0 +1,23 @@
+\chapter{Method}\label{chp:method}
+
+
+See my nice algorithm at \autoref{alg:baseline}
+
+\begin{algorithm}
+    \caption{Baseline}\label{alg:baseline}
+    \begin{algorithmic}
+        \Require $n \geq 0$
+        \Ensure 
+        \State $X \gets x$
+        \State $N \gets n$
+        \While{$N \neq 0$}
+        \If{$N$ is even}
+            \State $X \gets X \times X$
+            \State $N \gets \frac{N}{2}$  \Comment{This is a comment}
+        \ElsIf{$N$ is odd}
+            \State $y \gets y \times X$
+            \State $N \gets N - 1$
+        \EndIf
+        \EndWhile
+        \end{algorithmic}
+\end{algorithm}
