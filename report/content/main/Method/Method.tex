@@ -1,23 +1,20 @@
 \chapter{Method}\label{chp:method}
 
+The method we will use to analyze and compare the different algorithms will be as follows.
 
-See my nice algorithm at \autoref{alg:baseline}
+We will create a large collection of randomly created instances/situations. Each of the algorithms will then be tasked with dividing the items. These allocations and division will then be compared directly in regards to the average score each agent gives their own bundle, and the total valuation for all agent combined. Because all algorithms will use the exact same items with the exact same valuations and agents, a comparison where one algorithms clearly outperforms the others wil be a clear sign that this algorithm is superior for that specific situation. The instances will be divided into a number of groups:
 
-\begin{algorithm}
-    \caption{Baseline}\label{alg:baseline}
-    \begin{algorithmic}
-        \Require $n \geq 0$
-        \Ensure 
-        \State $X \gets x$
-        \State $N \gets n$
-        \While{$N \neq 0$}
-        \If{$N$ is even}
-            \State $X \gets X \times X$
-            \State $N \gets \frac{N}{2}$  \Comment{This is a comment}
-        \ElsIf{$N$ is odd}
-            \State $y \gets y \times X$
-            \State $N \gets N - 1$
-        \EndIf
-        \EndWhile
-        \end{algorithmic}
-\end{algorithm}
+\begin{itemize}
+    \item \textbf{Single Small Cake:} Instance with at least 1 indivisible item and 1 small cake (the indivisible items are dominant).
+    \item \textbf{Single Large Cake:} Instance with at least 1 indivisible item and 1 large cake (the cake is dominant).
+    \item \textbf{Multiple Cakes:} Instances with multiple divisible items. 
+\end{itemize}
+
+in addition to these metrics the algorithms will also be compared in regards to the time it takes to run the algorithm, and the general complexity/robustness the algorithm has. A very simple algorithm that perform just as well as, or close to, a complex algorithm can be considered a better algorithm. These evaluations are done in \autoref{chp:results} and finally presented in \autoref{chp:conclusion}. 
+
+
+\clearpage
+\input{content/main/Method/previous-solutions.tex}
+\clearpage
+\input{content/main/Method/our-solution.tex}
+

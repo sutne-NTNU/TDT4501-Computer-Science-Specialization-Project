@@ -14,6 +14,9 @@
 \usepackage{tikz} % graph drawing
 \usepackage{hyperref} % enable links
 
+\usepackage{lineno}
+\linenumbers
+
 % autoref Names
 \addto\extrasenglish{
     \def\chapterautorefname{Chapter}
@@ -54,11 +57,10 @@ array/.style={matrix of nodes,nodes={draw,scale=1,minimum size=7mm,font=\Large},
 \hypersetup{
     colorlinks,
     linkcolor=black,
-    citecolor=blue,
+    citecolor=black,
     filecolor=black,
     urlcolor=blue
 }
-
 
 
 
@@ -74,6 +76,7 @@ array/.style={matrix of nodes,nodes={draw,scale=1,minimum size=7mm,font=\Large},
 \AtBeginDocument{\floatplacement{table}{H}}
 \AtBeginDocument{\floatplacement{equation}{H}}
 \AtBeginDocument{\floatplacement{listing}{H}}
+\AtBeginDocument{\floatplacement{algorithm}{H}}
 
 % Listing numbering to [Chapter].[Listing]
 \makeatletter

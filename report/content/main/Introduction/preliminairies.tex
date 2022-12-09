@@ -4,19 +4,18 @@ Collection of terminology, notation and definitions that are presumed to be know
 
 
 \subsection*{Mixed Goods}
-When discussion mixed goods we are talking about a mix of both indivisible and divisible goods (often referred to as $cake$). A mixed goods instance can contain any combination of number of divisible and indivisible goods. A good means that all items will have a positive utility or value for all agents.
+When discussion mixed goods we are talking about a mix of both indivisible (i.e. paintings, cars, equipment etc.) and divisible goods (often referred to as $cake$). A mixed goods instance can contain any combination of number of divisible and indivisible goods. A good means that all items will have a positive utility or value for all agents.
 
 
 
 \subsection*{Problem Instance}
-An instance $\langle N, M, V, F \rangle$ of the fair division problem is defined by a:
+An instance $\langle N, M, V, F \rangle$ of the fair allocation of mixed goods problem is defined by a:
 \begin{itemize}
     \item set $N$ of $n \in N$ agents
     \item set $M$ of $m \in M$ indivisible items
     \item set $V$ of $v \in V$ valuation functions where $v_i$ is valuation function for agent $i$
-    \item density function $F$ that divides divisible items
+    \item set $F$ of $f \in F$ density functions where $f_d$ divides divisible item $d$
 \end{itemize}
-a set $M$ of $m \in N$ indivisible items, and a valuation profile $V = {v_1, v_2, . . . , v_n}$ that specifies the preferences of every agent $i \in N$ over each subset of the items in $M$ via a valuation function $v_i : 2M \rightarrow R$.
 
 
 
@@ -47,10 +46,10 @@ The envy graph $GA$ of an allocation $A$ is a directed graph on the vertex set $
 
 \subsection*{Envy-freeness and its relaxations}
 \textbf{EF}\\
-An allocation $A$ is said to be envy-free (EF) if for every pair of agents $i,k \in N$, we have $v_i(A_i) \geq v_i(A_k)$,
+An allocation $A$ is said to be envy-free (EF) if for every pair of agents $i,k \in N$, we have $v_i(A_i) \geq v_i(A_k)$. In other words, no agent prefers the bundle of another agent over their own bundle.
 
 \textbf{EF1}\\
-An allocation $A$ is said to be envy-free up to one item (EF1) if for every pair of agents $i, k \in N$ such that $A_i \cap A_k \backslash= \emptyset$, there exists an item $j \in A_i \cup A_k$ such that $v_i(A_i \backslash {j}) \geq v_i(A_k \backslash {j})$.
+An allocation $A$ is said to be envy-free up to one item (EF1) if for every pair of agents $i, k \in N$ such that $A_i \cap A_k \backslash= \emptyset$, there exists an item $j \in A_i \cup A_k$ such that $v_i(A_i \backslash {j}) \geq v_i(A_k \backslash {j})$. 
 
 \textbf{Envy-freeness for mixed goods (EFM)}\\
 An allocation $A$ is said to satisfy envy-freeness for mixed goods (EFM) if for any agents $i,j \in N$,
