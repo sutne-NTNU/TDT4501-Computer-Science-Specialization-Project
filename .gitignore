@@ -1,11 +1,13 @@
 *.DS_Store
 *.vscode
 temp
+temp.*
 
 *.aux
 *.bbl
 *.bcf
 *.blg
+*.loa
 *.lof
 *.log
 *.lol
