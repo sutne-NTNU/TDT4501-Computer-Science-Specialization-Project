@@ -1,0 +1,5 @@
+cake_size,mixed_approximate,mixed_exact,indivisible
+Small,0.0212,164.0,0.125
+Medium,0.0221,86.8,0.11
+Large,0.0328,15.0,0.112
+Variable,0.0247,98.1,0.114
