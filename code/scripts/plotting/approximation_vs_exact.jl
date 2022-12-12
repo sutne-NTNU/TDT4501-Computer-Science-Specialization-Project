@@ -1,4 +1,7 @@
 using code
+using CSV
+using Plots
+using DataFrames
 
 include("plots/util.jl")
 include("plots/combination.jl")

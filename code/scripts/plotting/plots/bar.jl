@@ -11,7 +11,7 @@ function plot_instance(title::String, instance::Instance)
         title=title,
         bar_width=0.8,
         legend=:topleft,
-        size=(700, 200),
+        size=(config.width, 200),
         xticks=(Agents(instance), get_agent_labels(instance)),
         label=get_good_labels(instance),
     )
@@ -53,7 +53,7 @@ function plot_allocation_for_agents(title::String, allocation::MixedAllocation)
         push!(plots, agent_plot)
         highest_bundle_value = max(highest_bundle_value, maximum(sum(bundles, dims=2)))
     end
-    return plot(plots..., layout=l, size=(700, 200), ylims=(0, highest_bundle_value))
+    return plot(plots..., layout=l, size=(config.width, 200), ylims=(0, highest_bundle_value))
 end
 
 
@@ -86,5 +86,5 @@ function plot_mms_allocation_for_agents(title::String, instance::Instance)
         push!(plots, bundle_chart)
     end
 
-    return plot(plots..., size=(700, 200), layout=l, ylims=(0, highest_bundle_value))
+    return plot(plots..., size=(config.width, 200), layout=l, ylims=(0, highest_bundle_value))
 end

@@ -26,3 +26,10 @@ function get_good_labels(instance::Instance)
     ]
     return to_label_list(labels)
 end
+
+
+struct Config
+    width::Int
+end
+
+config = Config(800)
