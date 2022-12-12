@@ -14,7 +14,7 @@ mutable struct Instance
 end
 
 
-""" Initialize a new instance with random valuations from 0 to 1 for all goods, optionally multiply valuation for cake by `cake_multiplier` """
+""" Initialize a new instance with random valuations from 0 to 1 for all goods """
 function Instance(; num_agents::Int, num_goods::Int, cake_size::Int)
     # original plan was for the algorithms to be able to handle any number of cakes, 
     # unfortunately there wasnt time to allow the mixed algorithm to fully support this 
@@ -73,3 +73,6 @@ Agents(instance::Instance) = 1:instance.num_agents
 Goods(instance::Instance) = 1:instance.num_goods
 Cakes(instance::Instance) = (instance.num_items+1):instance.num_goods
 Items(instance::Instance) = 1:instance.num_items
+
+""" (size, name) iterator for all cake variations """
+CakeSizes() = enumerate(["Small", "Medium", "Large", "Individual"])

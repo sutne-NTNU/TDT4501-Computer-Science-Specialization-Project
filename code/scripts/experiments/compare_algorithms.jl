@@ -1,8 +1,4 @@
 using code
-using CSV
-using DataFrames
-using ProgressBars
-
 
 
 function run_instances_for_mms(;
@@ -12,11 +8,11 @@ function run_instances_for_mms(;
     num_pieces::Int,
     num_instances::Int=10000
 )
+    (size, name) = CakeSizes()
+    println("Comparing with $(name[cake_size]) cake and $(num_pieces) pieces")
+
     # create empty dataframe to store MMS values
     dataframe = DataFrame(indivisible=[], mixed=[])
-
-    size = ["small", "medium", "large", "variable"]
-    println("Comparing with $(size[cake_size]) cake and $(num_pieces) pieces")
 
     for _ in ProgressBar(1:num_instances, width=UInt(75))
         # create random instance
@@ -34,8 +30,7 @@ function run_instances_for_mms(;
         push!(dataframe, [indivsible_mms, mixed_mms])
     end
 
-    # write the dataframe to file
-    CSV.write("code/results/data/mms_indivisible_$(num_pieces)_pieces_vs_mixed_$(size[cake_size]).csv", dataframe)
+    CSV.write("code/results/data/mms_indivisible_$(num_pieces)_pieces_vs_mixed_$(lowercase(name[cake_size])).csv", dataframe)
 end
 
 
@@ -44,9 +39,10 @@ function compare_algorithms()
         cake_size=3, # large for biggest difference
         num_pieces=1,
     )
-    for cake_size in 1:4
+
+    for (size, name) in CakeSizes()
         run_instances_for_mms(
-            cake_size=cake_size,
+            cake_size=size,
             num_pieces=4,
         )
     end

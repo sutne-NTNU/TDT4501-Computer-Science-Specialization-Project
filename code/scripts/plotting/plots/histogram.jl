@@ -1,3 +1,5 @@
+using code
+
 include("util.jl")
 
 function plot_mms_histogram_comparison(x, xlabel::String, y, ylabel::String)

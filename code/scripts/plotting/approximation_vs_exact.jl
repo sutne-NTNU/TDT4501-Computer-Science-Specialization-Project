@@ -1,3 +1,5 @@
+using code
+
 include("plots/util.jl")
 include("plots/combination.jl")
 

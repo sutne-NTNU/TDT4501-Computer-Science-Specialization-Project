@@ -1,5 +1,4 @@
 using code
-using Revise
 
 function test_algorithms()
     instance = Instance(

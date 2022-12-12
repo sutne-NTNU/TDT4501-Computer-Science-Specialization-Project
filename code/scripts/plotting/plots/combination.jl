@@ -1,3 +1,6 @@
+using code
+using Plots
+
 include("util.jl")
 include("scatter.jl")
 include("histogram.jl")

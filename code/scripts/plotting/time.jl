@@ -1,4 +1,4 @@
-using StatsPlots
+using code
 
 include("plots/util.jl")
 
@@ -14,7 +14,7 @@ function plot_time()
         # bar_position=:dodge,
         label=["Mixed Approximate" "Mixed Exact" "Indivisible"],
         legend=:topleft,
-        xticks=([1, 2, 3, 4], ["Small Cake" "Medium Cake" "Large Cake" "Variable Cake"]),
+        xticks=(1:4, ["Small Cake" "Medium Cake" "Large Cake" "Variable Cake"]),
         ylabel="Time (ms)",
     )
     savefig("code/results/plots/time.png")

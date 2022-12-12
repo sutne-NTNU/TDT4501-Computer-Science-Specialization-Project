@@ -1,12 +1,11 @@
 using code
-using Revise
 
 function test_mms()
-    for cake_size in 1:4
+    for (size, name) in CakeSizes()
         instance = Instance(
             num_agents=3,
             num_goods=4,
-            cake_size=cake_size
+            cake_size=size
         )
         visualize(instance)
         # Print each agents MMS allocation

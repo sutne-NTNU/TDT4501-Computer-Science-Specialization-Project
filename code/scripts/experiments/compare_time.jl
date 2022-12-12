@@ -1,7 +1,4 @@
 using code
-using CSV
-using DataFrames
-using ProgressBars
 
 
 
@@ -17,8 +14,7 @@ function compare_time(
         indivisible=[],
     )
 
-    cake_sizes = ["small", "medium", "large", "variable"]
-    for size in 1:4
+    for (size, name) in CakeSizes()
         # create the random instances
         instances = []
         for _ in 1:num_instances
@@ -38,17 +34,17 @@ function compare_time(
 
 
         # take time of mixed algorithm using approximate MMS (PROP)
-        println("Mixed Approximate, $(cake_sizes[size]) Cake")
+        println("Mixed Approximate, $name Cake")
         time_mixed_approximate = @elapsed for instance in ProgressBar(instances, width=UInt(75))
             alloc_half_mms_mixed(instance, approximate=true)
         end
         # take time of mixed algorithm using exact mms calculation
-        println("Mixed Exact, $(cake_sizes[size]) Cake")
+        println("Mixed Exact, $name Cake")
         time_mixed_exact = @elapsed for instance in ProgressBar(instances, width=UInt(75))
             alloc_half_mms_mixed(instance, approximate=false)
         end
         # take time for indivisible algorithm
-        println("Indivisible, $(cake_sizes[size]) Cake")
+        println("Indivisible, $name Cake")
         time_indivisible = @elapsed for instance in ProgressBar(instances, width=UInt(75))
             alloc_half_mms(instance, instance.num_agents)
         end

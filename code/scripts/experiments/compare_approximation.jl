@@ -1,7 +1,5 @@
 using code
-using CSV
-using DataFrames
-using ProgressBars
+
 
 
 
@@ -12,7 +10,7 @@ function compare_approximation(;
 )
     dataframe = DataFrame(approximate=[], exact=[])
 
-    for size in 1:4
+    for (size, name) in CakeSizes()
         for _ in ProgressBar(1:(num_instances/4), width=UInt(75))
             # create random instance
             instance = Instance(num_agents=num_agents, num_goods=num_goods, cake_size=size)
@@ -22,11 +20,11 @@ function compare_approximation(;
             alloc_approximate = alloc_half_mms_mixed(instance, approximate=true)
 
             # find lowest mms values
-            exact_mms = minimum(calc_mms_values(alloc_exact))
-            approximate_mms = minimum(calc_mms_values(alloc_approximate))
+            exact_mms_result = minimum(calc_mms_values(alloc_exact))
+            approximate_mms_result = minimum(calc_mms_values(alloc_approximate))
 
-            # add lowest mms value to respective list
-            push!(dataframe, [approximate_mms, exact_mms])
+            # add lowest mms values to dataframe
+            push!(dataframe, [approximate_mms_result, exact_mms_result])
         end
     end
 

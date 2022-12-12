@@ -1,3 +1,6 @@
+using code
+using Printf
+
 include("util.jl")
 
 function plot_mms_pie_percentages(x, xlabel, y, ylabel)
@@ -10,12 +13,14 @@ function plot_mms_pie_percentages(x, xlabel, y, ylabel)
         error("n != (x_wins + y_wins + equal)")
     end
 
-    x_win_percentage = @sprintf("%02.1f", 100 * x_wins / n)
-    y_win_percentage = @sprintf("%02.1f", 100 * y_wins / n)
-    equal_percentage = @sprintf("%02.1f", 100 * equal / n)
+    to_percent(x) = lpad(@sprintf("%.1f", 100 * x / n), 4, "0")
 
     return pie(
-        ["$x_win_percentage% $xlabel"; "$y_win_percentage% $ylabel:"; "$equal_percentage% Equal"],
+        [
+            "$(to_percent(x_wins))% - $xlabel"
+            "$(to_percent(y_wins))% - $ylabel"
+            "$(to_percent(equal))% - Equal"
+        ],
         [x_wins, y_wins, equal],
         legend=:topleft,
     )

@@ -1,5 +1,4 @@
-using Plots
-using Printf
+using code
 
 """
 Takes a comma seperated list of strings and return a correctly formatted matrix 
@@ -13,13 +12,17 @@ function get_agent_labels(instance::Instance)
     return to_label_list(["Agent $a" for a in Agents(instance)])
 end
 
+function get_bundle_labels(instance::Instance)
+    return to_label_list(["Bundle $a" for a in Agents(instance)])
+end
+
 function get_good_labels(instance::Instance)
     labels = [
         if g in Items(instance)
             "Item $g"
         else
             "Cake"
-        end for g in 1:instance.num_goods
+        end for g in Goods(instance)
     ]
     return to_label_list(labels)
 end

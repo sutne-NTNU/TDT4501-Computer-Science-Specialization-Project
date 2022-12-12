@@ -1,11 +1,20 @@
 module code
 
 using Revise
-using Printf
+
 using Allocations
 import JuMP
 using JuMP: Model, optimizer_with_attributes, objective_value, @variable,
     @objective, @constraint, fix, optimize!, termination_status, MOI, set_binary
+
+using Printf
+using CSV
+using DataFrames
+using ProgressBars
+using Plots
+using Plots.PlotMeasures
+using StatsPlots
+using LaTeXStrings
 
 include("structs/instance.jl")
 include("structs/mixed_allocation.jl")
@@ -25,7 +34,7 @@ export
     Cakes,
     Items,
     Goods,
-    CakeSize,
+    CakeSizes,
     MixedAllocation,
     alloc_half_mms_mixed,
     alloc_half_mms,

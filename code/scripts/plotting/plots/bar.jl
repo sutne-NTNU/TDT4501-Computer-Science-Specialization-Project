@@ -1,3 +1,8 @@
+using code
+using Plots
+using Plots.PlotMeasures
+using StatsPlots
+
 include("util.jl")
 
 function plot_instance(title::String, instance::Instance)
@@ -6,92 +11,80 @@ function plot_instance(title::String, instance::Instance)
         title=title,
         bar_width=0.8,
         legend=:topleft,
-        size=(600, 300),
+        size=(700, 200),
         xticks=(Agents(instance), get_agent_labels(instance)),
         label=get_good_labels(instance),
     )
 end
 
 
-""" 
-    plot_allocation(allocation) -> StatsPlots.Plot
-
-Visualize the the value each agent gives their own bundle.
-"""
-function plot_allocation(title::String, allocation::MixedAllocation)
-    return groupedbar(
-        allocation.assigned,
-        title=title,
-        bar_position=:stack,
-        bar_width=0.8,
-        legend=false,
-        label=get_good_labels(allocation.instance),
-        yaxis=:none,
-        xticks=(Agents(allocation.instance), get_agent_labels(allocation.instance)),
-    )
-end
-
-""" 
-    plot_allocation(allocation) -> StatsPlots.Plot
-
-Visualize the the value each agent gives their own bundle.
-"""
-function plot_bundles(title::String, allocation::MixedAllocation)
-    bundle_sizes = allocation.instance.valuations .* allocation.assigned
-    return groupedbar(
-        bundle_sizes,
-        title=title,
-        bar_position=:stack,
-        bar_width=0.8,
-        legend=false,
-        label=get_good_labels(allocation.instance),
-        xticks=(Agents(allocation.instance), get_agent_labels(allocation.instance)),
-    )
-end
-
-
-
-
-""" 
-Plot how each agent sees the given allocation by highlighting the agent, and using that agents valuation profile 
-to find that agents value of the other agent's bundle's. Useful to see how "fair" that agent's own bundle is compared to the others.
-"""
 function plot_allocation_for_agents(title::String, allocation::MixedAllocation)
-    plots = []
+    l = (@layout [
+        a{0.000001h}
+        b c d
+    ])
+    plots = [plot(title=title, grid=false, xaxis=false, yaxis=false)]
+
+    highest_bundle_value = 0
     for agent in Agents(allocation.instance)
         alphas = [
             if a == agent
                 1.0
             else
-                0.5
+                0.3
             end for a in 1:allocation.instance.num_agents
         ]
         valuation = allocation.instance.valuations[agent, :]
-        bundle_sizes = valuation' .* allocation.assigned
+        bundles = valuation' .* allocation.assigned
         agent_plot = groupedbar(
             title="Agent $agent",
-            bundle_sizes,
+            bundles,
             yaxis=:none,
             bar_position=:stack,
             bar_width=0.8,
             alpha=alphas,
-            legend=agent == 1,
+            legend=false,
+            size=(900, 400),
             label=get_good_labels(allocation.instance),
             xticks=(Agents(allocation.instance), get_agent_labels(allocation.instance)),
         )
+        # add horizontal daheed line at y=1.2
+        hline!([mms_mixed(allocation.instance, agent).maximin], color=:black, linestyle=:dash, label="MMS")
         push!(plots, agent_plot)
+        highest_bundle_value = max(highest_bundle_value, maximum(sum(bundles, dims=2)))
     end
-    return plot(plots..., layout=allocation.instance.num_agents, plot_title=title)
+    return plot(plots..., layout=l, size=(700, 200), ylims=(0, highest_bundle_value))
 end
 
 
+
+
 function plot_mms_allocation_for_agents(title::String, instance::Instance)
-    # Plotting each agents MMS allocation
-    plots = []
-    for agent in 1:instance.num_agents
-        result = mms_mixed(instance, agent)
-        fig = plot_bundles("Agent $agent", result.allocation)
-        push!(plots, fig)
+    # create plot layout with empty space on top for the header (prevent overlap)
+    l = (@layout [
+        a{0.000001h}
+        b c d
+    ])
+    plots = [plot(title=title, grid=false, xaxis=false, yaxis=false)]
+
+    highest_bundle_value = 0
+    for agent in Agents(instance)
+        # get the MMS allocation for this agent
+        allocation = mms_mixed(instance, agent).allocation
+
+        bundles = allocation.instance.valuations .* allocation.assigned
+        bundle_chart = groupedbar(
+            bundles,
+            title="Agent $agent",
+            bar_position=:stack,
+            bar_width=0.8,
+            legend=false,
+            label=get_good_labels(allocation.instance),
+            xticks=(Agents(allocation.instance), get_bundle_labels(allocation.instance)),
+        )
+        highest_bundle_value = max(highest_bundle_value, maximum(sum(bundles, dims=2)))
+        push!(plots, bundle_chart)
     end
-    return plot(plots..., size=(700, 300), layout=(1, instance.num_agents), plot_title="$title", topmargin=1mm)
+
+    return plot(plots..., size=(700, 200), layout=l, ylims=(0, highest_bundle_value))
 end

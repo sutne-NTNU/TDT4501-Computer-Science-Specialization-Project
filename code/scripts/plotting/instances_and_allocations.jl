@@ -1,32 +1,42 @@
-using CSV
-using DataFrames
+using code
 using Plots
-using Plots.PlotMeasures
-using StatsPlots
 using LaTeXStrings
 
 include("plots/util.jl")
+include("plots/bar.jl")
 
-function visualize_mms_and_allocations_with_plots()
-    sizes = ["Small", "Medium", "Large", "Variable"]
-    for size in 1:4
+function plot_instances_and_allocations()
+    # create and plot random small, medium and large instances
+    for (size, name) in CakeSizes()
         instance = Instance(num_agents=3, num_goods=4, cake_size=size)
-
-        plot_instance("$(sizes[size]) Cake Instance", instance)
-        savefig("$(plot_dir)visualize_instance_$(sizes[size])_cake.png")
-        plot_mms_allocation_for_agents("Each agent's MMS Allocation, $(sizes[size]) Cake", instance)
-        savefig("$(plot_dir)visualize_mms_allocation_$(sizes[size])_cake.png")
-
-        alloc = alloc_half_mms(instance)
-        plot_allocation("Indivisible Algorithm $(sizes[size]) Cake", alloc)
-        savefig("$(plot_dir)visualize_indivisible_allocation_$(sizes[size])_cake.png")
-
-        alloc = alloc_half_mms(instance, instance.num_agents)
-        plot_allocation("Inidvisible Algorithm $(L"n") pieces, $(sizes[size]) Cake", alloc)
-        savefig("$(plot_dir)visualize_indivisible_n_pieces_allocation_$(sizes[size])_cake.png")
-
-        alloc = alloc_half_mms_mixed(instance)
-        plot_allocation("Mixed Algorithm, $(sizes[size]) Cake", alloc)
-        savefig("$(plot_dir)visualize_mixed_allocation_$(sizes[size])_cake.png")
+        plot_instance("$(name) Cake Instance", instance)
+        savefig("code/results/plots/instance_$(lowercase(name)).png")
     end
+
+    # create custom individual instance to visualize difference of different algorithms
+    instance = Instance([
+        1.1 1.2 1.3 4.4
+        3.1 1.2 2.3 1.4
+        1.3 1.2 1.1 2.2
+    ])
+    plot_instance("Individual Cake Instance", instance)
+    savefig("code/results/plots/instance_individual.png")
+
+    # plot each agents mms allocation
+    plot_mms_allocation_for_agents("Each agent's MMS Allocation, Individual Cake", instance)
+    savefig("code/results/plots/allocation_all_mms.png")
+
+    # plot the allocation for each algorithm
+    alloc = alloc_half_mms(instance)
+    plot_allocation_for_agents("Indivisible Algorithm Individual Cake", alloc)
+    savefig("code/results/plots/allocation_indivisible.png")
+
+    alloc = alloc_half_mms(instance, instance.num_agents)
+    plot_allocation_for_agents("Inidvisible Algorithm with $(L"n") pieces, Individual Cake", alloc)
+    savefig("code/results/plots/allocation_n_pieces.png")
+
+    alloc = alloc_half_mms_mixed(instance)
+    plot_allocation_for_agents("Mixed Algorithm, Individual Cake", alloc)
+    savefig("code/results/plots/allocation_mixed.png")
 end
+plot_instances_and_allocations()
