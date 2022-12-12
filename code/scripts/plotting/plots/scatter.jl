@@ -13,8 +13,8 @@ function plot_mms_scatter_comparison(x, xlabel::String, y, ylabel::String)
         label="MMS",
         legend=:topleft,
         aspect_ratio=:equal,
-        xlims=(0, max(1.25, x...) + 0.25),
-        ylims=(0, max(1.25, y...) + 0.25),
+        xlims=(0, 2),
+        ylims=(0, 2),
     )
     # Add diagonal line for where x=y
     Plots.abline!(scatter_plot, 1, 0, line=:dash, label="", color=:red)

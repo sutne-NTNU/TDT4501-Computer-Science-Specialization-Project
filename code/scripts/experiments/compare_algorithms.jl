@@ -1,5 +1,8 @@
 using code
-
+using CSV
+using DataFrames
+using ProgressBars
+using LaTeXStrings
 
 function run_instances_for_mms(;
     num_agents::Int=4,
@@ -8,8 +11,8 @@ function run_instances_for_mms(;
     num_pieces::Int,
     num_instances::Int=10000
 )
-    (size, name) = CakeSizes()
-    println("Comparing with $(name[cake_size]) cake and $(num_pieces) pieces")
+    cake_name = ["small", "medium", "large", "individual"][cake_size]
+    println("Comparing with $(cake_name) cake and $(num_pieces) pieces")
 
     # create empty dataframe to store MMS values
     dataframe = DataFrame(indivisible=[], mixed=[])
@@ -23,14 +26,14 @@ function run_instances_for_mms(;
         alloc_mixed = alloc_half_mms_mixed(instance)
 
         # find lowest mms values 
-        indivsible_mms = minimum(calc_mms_values(alloc_indivisible))
+        indivisible_mms = minimum(calc_mms_values(alloc_indivisible))
         mixed_mms = minimum(calc_mms_values(alloc_mixed))
 
         # add lowest mms values to dataframe
-        push!(dataframe, [indivsible_mms, mixed_mms])
+        push!(dataframe, [indivisible_mms, mixed_mms])
     end
 
-    CSV.write("code/results/data/mms_indivisible_$(num_pieces)_pieces_vs_mixed_$(lowercase(name[cake_size])).csv", dataframe)
+    CSV.write("code/results/data/mms_indivisible_$(num_pieces)_pieces_vs_mixed_$(cake_name)).csv", dataframe)
 end
 
 
