@@ -1,10 +1,6 @@
 using code
 using Revise
 
-
-
-
-
 function test_algorithms()
     instance = Instance(
         num_agents=3,
@@ -37,6 +33,4 @@ function test_algorithms()
     alloc = alloc_half_mms_mixed(instance)
     visualize(alloc)
 end
-
-
 test_algorithms()

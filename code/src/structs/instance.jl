@@ -17,22 +17,23 @@ end
 """ Initialize a new instance with random valuations from 0 to 1 for all goods, optionally multiply valuation for cake by `cake_multiplier` """
 function Instance(; num_agents::Int, num_goods::Int, cake_size::Int)
     # original plan was for the algorithms to be able to handle any number of cakes, 
-    # unfortunately this became too timeconsuming so the number of cakes will be set to always be 1 for now.
+    # unfortunately there wasnt time to allow the mixed algorithm to fully support this 
+    # so all instances has exactly 1 cake for now.
     num_cakes = 1
     cake_index = num_goods
     num_items = num_goods - num_cakes
+
     valuations = rand(num_agents, num_goods)
     # Adjust valuation of cake depending on its size
     for agent in 1:num_agents
-        # Value of cake for each agent is equal to/lower than all other items for that agent
+        # Value of cake for each agent is equal to or lower than the lowest valued good of the agent
         small = minimum(valuations[agent, :])
-        # Value of cake for each agent is equal to/larger than all other items for that agent
-        medium = maximum(valuations[agent, :])
+        # Value of cake for each agent is equal the highest valued item of the agent
+        medium = maximum(valuations[agent, 1:num_items]) # only look at the items to prevent overlap of medium and large cakes
         # Value of cake is the sum of all other items value
         large = sum(valuations[agent, :])
 
         if cake_size == 1
-
             valuations[agent, cake_index] = small
         elseif cake_size == 2
             valuations[agent, cake_index] = medium

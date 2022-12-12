@@ -1,3 +1,18 @@
+include("util.jl")
+
+function plot_instance(title::String, instance::Instance)
+    return groupedbar(
+        instance.valuations,
+        title=title,
+        bar_width=0.8,
+        legend=:topleft,
+        size=(600, 300),
+        xticks=(Agents(instance), get_agent_labels(instance)),
+        label=get_good_labels(instance),
+    )
+end
+
+
 """ 
     plot_allocation(allocation) -> StatsPlots.Plot
 
@@ -10,7 +25,9 @@ function plot_allocation(title::String, allocation::MixedAllocation)
         bar_position=:stack,
         bar_width=0.8,
         legend=false,
-        label="Good",
+        label=get_good_labels(allocation.instance),
+        yaxis=:none,
+        xticks=(Agents(allocation.instance), get_agent_labels(allocation.instance)),
     )
 end
 
@@ -27,7 +44,8 @@ function plot_bundles(title::String, allocation::MixedAllocation)
         bar_position=:stack,
         bar_width=0.8,
         legend=false,
-        label="Good",
+        label=get_good_labels(allocation.instance),
+        xticks=(Agents(allocation.instance), get_agent_labels(allocation.instance)),
     )
 end
 
@@ -40,13 +58,6 @@ to find that agents value of the other agent's bundle's. Useful to see how "fair
 """
 function plot_allocation_for_agents(title::String, allocation::MixedAllocation)
     plots = []
-    labels = [
-        if g in Items(allocation.instance)
-            "Item $g"
-        else
-            "Cake"
-        end for g in 1:allocation.instance.num_goods
-    ]
     for agent in Agents(allocation.instance)
         alphas = [
             if a == agent
@@ -60,11 +71,13 @@ function plot_allocation_for_agents(title::String, allocation::MixedAllocation)
         agent_plot = groupedbar(
             title="Agent $agent",
             bundle_sizes,
+            yaxis=:none,
             bar_position=:stack,
             bar_width=0.8,
             alpha=alphas,
             legend=agent == 1,
-            label=["Item 1" "Item 2" "Item 3" "Cake"],
+            label=get_good_labels(allocation.instance),
+            xticks=(Agents(allocation.instance), get_agent_labels(allocation.instance)),
         )
         push!(plots, agent_plot)
     end
@@ -80,5 +93,5 @@ function plot_mms_allocation_for_agents(title::String, instance::Instance)
         fig = plot_bundles("Agent $agent", result.allocation)
         push!(plots, fig)
     end
-    return plot(plots..., layout=instance.num_agents, plot_title=title)
+    return plot(plots..., size=(700, 300), layout=(1, instance.num_agents), plot_title="$title", topmargin=1mm)
 end
