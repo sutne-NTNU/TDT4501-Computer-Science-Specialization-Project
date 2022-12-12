@@ -11,7 +11,7 @@ function compare_mms_diagram(title::String, x, xlabel::String, y, ylabel::String
 
     return plot(
         scatter_plot, pie_percetnages, histogram,
-        layout=(@layout [a{0.7w} b{0.3w}; c{0.3h}]),
+        layout=(@layout [a{0.7w} b{0.3w}; c{0.275h}]),
         size=(800, 800),
         plot_title=title
     )
