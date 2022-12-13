@@ -74,6 +74,14 @@ Goods(instance::Instance) = 1:instance.num_goods
 Cakes(instance::Instance) = (instance.num_items+1):instance.num_goods
 Items(instance::Instance) = 1:instance.num_items
 
+""" (size, name) array for all cake variations """
+CakeSizes() = [
+    (1, "Small"),
+    (2, "Medium"),
+    (3, "Large"),
+    (4, "Individual"),
+]
+
 
 
 """ Convert my instance to `Additive` struct from the `Allocations` package after cutting divsible goods into `num_pieces` pieces """
