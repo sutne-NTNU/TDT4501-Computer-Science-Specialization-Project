@@ -74,5 +74,32 @@ Goods(instance::Instance) = 1:instance.num_goods
 Cakes(instance::Instance) = (instance.num_items+1):instance.num_goods
 Items(instance::Instance) = 1:instance.num_items
 
-""" (size, name) iterator for all cake variations """
-CakeSizes() = enumerate(["Small", "Medium", "Large", "Individual"])
+
+
+""" Convert my instance to `Additive` struct from the `Allocations` package after cutting divsible goods into `num_pieces` pieces """
+function to_Allocations(instance::Instance, num_pieces::Int)
+    if num_pieces == 1 || instance.num_cakes == 0
+        # no cakes or no cuts, all items are indivisible
+        additive = Additive(instance.valuations)
+        counts = Counts([n => instance.num_goods for n in 1:instance.num_goods]...)
+    else
+        # cut each cake into `num_pieces` pieces
+        total_goods = instance.num_items + (instance.num_cakes * num_pieces)
+        additive = Additive(instance.num_agents, total_goods)
+        counts = Counts([n => total_goods for n in 1:total_goods]...)
+        for agent in Agents(instance)
+            # start by copying over valuation for indivisible items directly
+            for item in Items(instance)
+                additive.values[agent, item] = instance.valuations[agent, item]
+            end
+            # adjust and add valuations to cake pieces
+            for cake in Cakes(instance)
+                piece_value = instance.valuations[agent, cake] / num_pieces
+                for piece in [cake + cut for cut in 0:num_pieces-1]
+                    additive.values[agent, piece] = piece_value
+                end
+            end
+        end
+    end
+    return (additive=additive, counts=counts)
+end

@@ -48,3 +48,28 @@ function is_valid(allocation::MixedAllocation)
     end
     return true
 end
+
+
+""" Convert result from `Allocations` alloc to MixedAllocation """
+function from_Allocations(alloc, instance::Instance, num_pieces::Int)
+    # Convert into MixedAllocation and return
+    allocation = MixedAllocation(instance)
+    for agent in Agents(instance)
+        bundle = alloc.alloc.bundle[agent]
+        # copy ownership of indivisible items
+        for item in Items(instance)
+            if item in bundle
+                allocation.assigned[agent, item] = 1
+            end
+        end
+        # accumulate ownership of cake pieces
+        for cake in Cakes(instance)
+            for piece in [(cake + cut) for cut in 0:num_pieces-1]
+                if piece in bundle
+                    allocation.assigned[agent, cake] += 1 / num_pieces
+                end
+            end
+        end
+    end
+    return allocation
+end
