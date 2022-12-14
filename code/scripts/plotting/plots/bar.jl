@@ -44,16 +44,16 @@ function plot_allocation_for_agents(title::String, allocation::MixedAllocation)
             bar_width=0.8,
             alpha=alphas,
             legend=false,
-            size=(900, 400),
             label=get_good_labels(allocation.instance),
             xticks=(Agents(allocation.instance), get_agent_labels(allocation.instance)),
         )
-        # add horizontal daheed line at y=1.2
-        hline!([mms_mixed(allocation.instance, agent).maximin], color=:black, linestyle=:dash, label="MMS")
+        mms = mms_mixed(allocation.instance, agent).maximin
+        hline!([mms], color=:black, linestyle=:dash, label="MMS")
+        hline!([0.5 * mms], color=:red, linestyle=:dash, label="1/2 MMS")
         push!(plots, agent_plot)
         highest_bundle_value = max(highest_bundle_value, maximum(sum(bundles, dims=2)))
     end
-    return plot(plots..., layout=l, size=(config.width, 200), ylims=(0, highest_bundle_value))
+    return plot(plots..., layout=l, size=(config.width, 250), ylims=(0, highest_bundle_value))
 end
 
 
