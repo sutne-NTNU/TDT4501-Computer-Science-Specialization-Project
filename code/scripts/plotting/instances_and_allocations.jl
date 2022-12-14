@@ -15,9 +15,9 @@ function plot_instances_and_allocations()
 
     # create custom individual instance to visualize difference of different algorithms
     instance = Instance([
-        1.1 1.2 1.3 4.4
-        3.1 1.2 2.3 1.4
-        1.3 1.2 1.1 2.2
+        1.1 1.2 0.9 6.4
+        3.3 1.1 1.2 2.4
+        2.3 1.3 1.1 4.3
     ])
     plot_instance("Individual Cake Instance", instance)
     savefig("code/results/plots/instance_individual.png")
