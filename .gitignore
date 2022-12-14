@@ -1,6 +1,7 @@
 *.DS_Store
 *.vscode
 temp
+temp*
 temp.*
 Manifest.toml
 
