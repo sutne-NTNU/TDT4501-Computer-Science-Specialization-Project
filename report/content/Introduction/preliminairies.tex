@@ -1,6 +1,6 @@
 \section{Preliminaries}\label{sec:preliminaries}
 
-Here i present all relevant terminology, notation and definitions that will be used throughout the report. Be aware that my notation does not use the most common notations from the literature, but instead uses a notation that i find more intuitive, which mostly means that use different letters than other literature, in order to better distinguish between the different types of goods.
+Here I present all relevant terminology, notation and definitions that will be used throughout the report. Be aware that my notation does not use the most common notations from the literature, but instead uses a notation that I find more intuitive, which mostly means that use different letters than other literature, in order to better distinguish between the different types of goods.
 
 % Just keep this here in case something changes later
 \def\sGood{g}
@@ -48,7 +48,7 @@ Furthermore, since a cake is divisible, a piece of the cake will be defined as e
 A slice of the cake is then defined as $\sCake_{[x,y]}$ where $x,y \in [0,1]$ and $x \leq y$ where the size of the slices of cake is $\sCake_y-\sCake_x$. As this project focuses on homogenous cake (see \autoref{subsec:homogenous-cake}), the exact interval of the cake is not important, a slice of cake will for this project then only needs to be specified to by its size $z$, where $\sCake_z\equiv\sCake_y-\sCake_x\equiv\sCake_{[x,y]}$ where we can assume $x=0$.
 
 \textbf{Good}\\
-Since we are in a mixed setting, a good can be either divisible or indivisible. It is therefor convenient to able to refer to goods $\sGood$ that can be either an item or cake. Formally:
+Since we are in a mixed setting, a good can be either divisible or indivisible. It is therefore convenient to able to refer to goods $\sGood$ that can be either an item or cake. Formally:
 $$\sGood\in\{1,2,...,\sNumItems\}\cup\{\sCake_1, \sCake_2, ...,\sNumCakes\}\equiv\sGood\in\sAllItems\cup\sAllCakes\equiv\sGood\in\sAllGoods$$
 
 
@@ -99,16 +99,15 @@ $$\forall\sBundle_x\sBundle_y\in\sAllocation, \sBundle_x\cap\sBundle_y=\emptyset
 
 
 \subsection*{Proportionality (PROP)}
-\emph{Proportionality} is a fairness-notion where each agent receives a a bundle valued proportionally compared their value of all goods. Formally, an allocation $\sAllocation$ satisfies proportionality $\PROP$ if:
+\emph{Proportionality} is a fairness-notion where each agent receives a bundle valued proportionally compared their value of all goods. Formally, an allocation $\sAllocation$ satisfies proportionality $\PROP$ if:
 $$\forall\sAgent\in\sAllAgents, \sValuation_\sAgent(\sBundle_\sAgent)\geq\frac{\sValuation_\sAgent(\sAllGoods)}{\sNumAgents}$$
 
 
 
 \subsection*{MaxiMinShare (MMS)}
-\emph{MaxiMinShare} is a relaxation of the proportionality fairness notion often used for instances with indivisible goods. MMS looks at what each agent would expect to receive if they were to divide the instance themselves, and then receive the smallest valued bundle. This means each agent attempt to maximize the minimum bundle. When talking about MMS in this report, simply $\MMS$ or $\MMS_\sAgent$ is used. This is a umbrella way to talk about the "expected" or 1-MMS value of an agent, and the $\alpha-MMS$ value an algorithm guarantees, or achieves for an agent. 
+\emph{MaxiMinShare} is a relaxation of the proportionality fairness notion often used for instances with indivisible goods. MMS looks at what each agent would expect to receive if they were to divide the instance themselves, and then receive the smallest valued bundle. This means each agent attempt to maximize the minimum bundle. 
 
-An example how how each agents MMS allocation can look like is shown in \autoref{fig:allocation_all_mms}. The MMS value of each agent is then the value of tha worst/smallest bundle in their allocation.  
-In this report this value will be referred to as $\MMS_\sAgent(\sInstance)$. If it is clear from context what instance is being used, the shorthand $\MMS_\sAgent$ will be used.
+An example of how each agents MMS allocation can look like is shown in \autoref{fig:allocation_all_mms}. The MMS value of each agent is then the value of the worst/smallest bundle in their allocation. In this report this value will be referred to as $\MMS_\sAgent(\sInstance)$. If it is clear from context what instance is being used, the shorthand $\MMS_\sAgent$ will be used. When talking about MMS in general in this report, simply $\MMS$ or $\MMS_\sAgent$ is used. This is simply a shorthand to talk about the "expected" or 1-MMS value of an agent, and the $\alpha-MMS$ value an algorithm guarantees, or achieves for an agent. 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{allocation_all_mms.png}
@@ -119,7 +118,7 @@ In this report this value will be referred to as $\MMS_\sAgent(\sInstance)$. If 
 
 
 \subsection*{Envy-Freeness}
-Envy-freeness is another common fairness notion that is prominent int the literature for indivisible goods. This project does not directly apply any of these fairness notions, but as they are still relevant i will explain them briefly here.  
+Envy-freeness is another common fairness notion that is prominent int the literature for indivisible goods. This project does not directly apply any of these fairness notions, but as they are still relevant I will explain them briefly here.  
 
 \textbf{EF}\\
 An allocation $\sAllocation$ is said to be envy-free (EF) if for every pair of agents $\sAgent_1,\sAgent_2 \in \sAllAgents$, we have $\sValuation_{\sAgent_1}(\sBundle_1) \geq \sValuation_{\sAgent_1}(\sBundle_2)$. In other words, no agent prefers the bundle of another agent over their own bundle.

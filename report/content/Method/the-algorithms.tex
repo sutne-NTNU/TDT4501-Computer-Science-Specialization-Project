@@ -2,14 +2,14 @@
 
 \subsection{\texorpdfstring{$\halfMMS$}{1/2MMS} Indivisible Algorithm}\label{subsec:alg-indivisible}
 
-This algorithm i will not implement myself, as i will utilize a already implemented algorithm\cite{Allocations} for $\halfMMS$ under works by \emph{Hummel} and \emph{Hetland}. This specific implementation has the additional specification of handling cardinality constraints.When i am using the algorithm i will not be utelizing these constraints by simply setting the constraint for all items to be the same as the total number of items. As the main benfit of using a already established algorithm is that there isn't such a need to understand all the details of the algorithm, as such i won't go into exact details of this algorithm here, and instead refer to the source directly for more details\cite{Allocations}.
+This algorithm I will not implement myself, as I will utilize an already implemented algorithm from \cite{Allocations} for $\halfMMS$ under works by \emph{Hummel} and \emph{Hetland}. This specific implementation has the additional specification of handling cardinality constraints. When I am using the algorithm I will not be utilizing these constraints by simply setting the constraint for all items to be the same as the total number of items. As the main benefit of using a already established algorithm is that there isn't such a need to understand all the details of the algorithm, as such I won't go into exact details of this algorithm here, and instead refer to the source directly for more details\cite{Allocations}.
 
 
 
 
 \subsection{\texorpdfstring{$\halfMMS$}{1/2MMS} Indivisible Algorithm, Cut Cake in \texorpdfstring{$\sNumAgents$}{n} Pieces}\label{subsec:alg-cut-cake}
 
-This isn't exactly a new algorithm, but for simplicity i will name it as such. This "algorithm" simply uses the algorithm from \autoref{subsec:alg-indivisible}, with the only difference being that there is now a small pre-processing step where the cake is cut into $\sNumAgents$ equal pieces, where $\sNumAgents$ is the number of agents. 
+This isn't exactly a new algorithm, but for simplicity I will name it as such. This "algorithm" simply uses the algorithm from \autoref{subsec:alg-indivisible}, with the only difference being that there is now a small pre-processing step where the cake is cut into $\sNumAgents$ equal pieces, where $\sNumAgents$ is the number of agents. 
 
 Take for instance the following matrix of valuations for three agents and two goods (one item and one cake). Each row represents an agent, and each column represents a good, where the final column is the cake. The conversion then looks like this:
 $$
@@ -119,7 +119,7 @@ Finally any remaining items or cake is allocated by using bag-filling to the las
 
 \subsection{Visualized Allocations}
 
-In order to visually distinguish how these three variations of the algorithms work, more specifically how they handle the cake, i included \autoref{fig:allocations}. The stacked bars show how each agent values each bundle in the allocation, so both their own bundle, and the others bundle (semi-transparent). The dashed black line shows $\MMS_\sAgent$ for that agent $\sAgent\in\{1,2,3\}$, and the red dashed line is $\halfMMS_\sAgent$. See \autoref{fig:allocation_all_mms} to see exactly how each agent achieves this $\MMS$. The goal for the algorithms is then to allocate the goods such that the value each agent gives their own bundle crosses the red dashed line.
+In order to visually distinguish how these three variations of the algorithms work, more specifically how they handle the cake, I included \autoref{fig:allocations}. The stacked bars show how each agent values each bundle in the allocation, so both their own bundle, and the others bundle (semi-transparent). The dashed black line shows $\MMS_\sAgent$ for that agent $\sAgent\in\{1,2,3\}$, and the red dashed line is $\halfMMS_\sAgent$. See \autoref{fig:allocation_all_mms} to see exactly how each agent achieves this $\MMS$. The goal for the algorithms is then to allocate the goods such that the value each agent gives their own bundle crosses the red dashed line.
 
 \begin{figure}
     \centering
