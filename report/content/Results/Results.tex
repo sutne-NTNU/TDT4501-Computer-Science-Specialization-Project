@@ -1,0 +1,108 @@
+\chapter{Results}\label{chp:results}
+
+Note: The code used for this project has not been properly peer-reviewed and as such might contain oversights and/or bugs. For completeness, all source code for this project can be found at: \href{https://github.com/sutne-NTNU/TDT4501-Computer-Science-Specialization-Project/tree/main/code}{github.com/sutne-NTNU/TDT4501-Computer-Science-Specialization-Project}.
+
+\section{Experimentation Results}
+
+\subsection{Regular Indivisible Algorithm vs. Mixed Algorithm}
+
+This analysis simply looks at the results of the indivisible algorithm from \autoref{subsec:alg-indivisible} and compares it to the mixed algorithm from \autoref{subsec:alg-mixed}. This will give us an idea of how the indivisible algorithm handles the mixed instance. As explained in \autoref{chp:method}, both algorithms will be measured in terms of their Mixed MMS values, explained in \autoref{sec:preliminaries}.
+
+The results of this analysis are shown in \autoref{fig:indivisible_vs_mixed}. Since the plots contain a fair bit of information ill explain that here. The scatter plot shows each individual instance as a single dot, where one algorithm represents the dots x-value, and the other the y-value. This means that if $x=y$ both algorithm achieved the exact same MMS, the line $x=y$ divides then the plot in half. Dots that fall closer to the x-axis means that algorithm X performed better than algorithm Y and vise versa. To the right of the scatter plot is a pie chart that summarizes the scatter diagram by showing the percentages of instances where each instance was better, or equal. Due the a lot of the instances/dots overlapping in the actter diagram there is also a histogram on the bottom that shows the distribution of the achieved MMS values for each algorithm on top of each other.
+
+Note that in \autoref{fig:indivisible_vs_mixed} and \autoref{fig:indivisible_vs_mixed_large}, you can see a tiny amount of instances that fall below $\halfMMS$ in the histogram for the mixed algorithm. After inspecting these instances it seems this is only a floating point rounding error, as the lowest achieved MMS for these instances was $0.49999999999999944$.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{indivisible_vs_mixed.png}
+    \caption{Regular indivisible Algorithm vs Mixed Algorithm.}
+    \label{fig:indivisible_vs_mixed}
+\end{figure}
+
+\subsection{Cutting the cake}
+
+Now it is time to perform the analysis when cutting the divisible resource into $n$ pieces. We will perform this analysis on all cake variants seperately to more accurately analyze their results.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{indivisible_vs_mixed_small.png}
+    \caption{Indivisible Algorithm Cutting cake into $n$ pieces vs. Mixed Algorithm for Small Cakes.}
+    \label{fig:indivisible_vs_mixed_small}
+\end{figure}
+
+We observe in \autoref{fig:indivisible_vs_mixed_small} that as expected, the indivisible algorithm manages to maintain its $\halfMMS$ guarantee as the size of the cake small enough that there really isn't ever any need to cut it anyway. This was shown in a smaller experiment, not included in this report, the the indivisible algorithm managed to maintain its $\halfMMS$ guarantee even without cutting the cake.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{indivisible_vs_mixed_medium.png}
+    \caption{Indivisible Algorithm Cutting cake into $n$ pieces vs. Mixed Algorithm for Medium Cakes.}
+    \label{fig:indivisible_vs_mixed_medium}
+\end{figure}
+In \autoref{fig:indivisible_vs_mixed_medium} not much has changed, but the mixed algorithm has more cake to work with so it is more often able to, and forced to split the cake to achieve $\halfMMS$.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{indivisible_vs_mixed_large.png}
+    \caption{Indivisible Algorithm Cutting cake into $n$ pieces vs. Mixed Algorithm for Large Cakes.}
+    \label{fig:indivisible_vs_mixed_large}
+\end{figure}
+AS the cake has grown larger, we see in \autoref{fig:indivisible_vs_mixed_large} that the mixed algorithm is now almost always forced to cut the cake, achieving exactly $\halfMMS$ for the worst bundle.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{indivisible_vs_mixed_individual.png}
+    \caption{Indivisible Algorithm Cutting cake into $n$ pieces vs. Mixed Algorithm for Individual Cakes.}
+    \label{fig:indivisible_vs_mixed_individual}
+\end{figure}
+
+
+
+
+\subsubsection{Other Experiments}\label{subsec:other-experiments}
+In order to verify that the results of the indivisible algorithm managing to maintain its $\halfMMS$ guarantee aren't exclusive to this exact type of instance, there was also performed a more general analysis on 10 000 instances of varying sizes.
+
+These instances had a random number of agents $n$ where $2\leq\sNumAgents\leq7$, and where the number of goods $\sNumGoods$ were $\sNumAgents\leq\sNumGoods\leq2\sNumAgents$. These limits were set based on the time it takes to allocate these instances for both algorithms. The values were also chosen to ensure these instances cover a more nuanced range of instances, as the main analysis is done on instances were the number of goods could be evenly divided amongst the agents. I limit the instances to have at least $\sNumAgents$ goods, as the indivisible algorithm (without cutting the cake), each agent's MMS allocation would give them an empty bundle as there wouldn't be enough items to go around. This limit could have been removed however when only using the algorithm that cats the cake into $\sNumAgents$ pieces, as this way it would always be at least one slice of cake to each agent.The results of these verifying experiment are shown in \autoref{fig:other_experiments}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{other_experiments.png}
+    \caption{Indivisible Algorithm Cutting cake into $n$ pieces vs. Mixed Algorithm for a wide range of agents and number of goods.}
+    \label{fig:other_experiments}
+\end{figure}
+
+
+
+
+
+
+\subsection{Using Approximated MMS for the Mixed Algorithm}
+Next i will perform the same analysis as when comparing the algorithms to compare the results of using a approximated MMS value for the mixed algorithm. The results are shown in \autoref{fig:approximate_vs_exact}.
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{approximate_vs_exact.png}
+    \caption{Approximate vs. Exact MMS calculation for the Mixed Algorithm.}
+    \label{fig:approximate_vs_exact}
+\end{figure}
+
+Finally a very basic runtime analysis was done for the three variations of algorithms. These results are the average over 10 000 allocations of each type of cake. The results are shown in \autoref{tab:running_time}. Again these experiments are run on instances with $\sNumAgents=4$ and $\sNumGoods=8$. A mor comprehensive analysis should look at how the time is affected by changing the number of agents and goods as well to see how well each algorithm scales along the size of the instance.
+
+% Insert table over running time for the three algorithms
+\begin{table}[h]
+    \centering
+    \caption{Average time each algorithm spent allocating an instance.}
+    \label{tab:running_time}
+    \begin{tabular}{|l|ccc|}
+        \hline
+                        & Indivisible $\sNumAgents$ Pieces & Mixed Exact & Mixed Approxmation \\
+        \hline
+        Small Cake      & 0.138ms                          & 187ms       & 0.00538ms          \\
+        Medium Cake     & 0.170ms                          & 129ms       & 0.00215ms          \\
+        Large Cake      & 0.148ms                          & 25.0ms      & 0.00589ms          \\
+        individual Cake & 0.200ms                          & 121ms       & 0.00252ms          \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+
+
+\input{content/Results/discussion.tex}

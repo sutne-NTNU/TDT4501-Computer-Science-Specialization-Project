@@ -1,0 +1,31 @@
+\section{Previous Work}\label{sec:previous-work}
+
+Lets briefly look at what has been done in the literature for the three main different types of instances that are relevant, i won't go into any detail except list their most relevant findings. Most of this information, and more is covered in the survey \cite{survey} and the respective articles.
+
+
+\subsection{Indivisible Goods}\label{subsec:indivisible-goods}
+
+There has been thorough research on a wide variety of fairness-notions and goals for indivisible goods. The literature describes many algorithm solutions for each fairness-goal such as EF1, PO, MMS, MNW and more. In addition to changes and restrictions of the instance such as binary valuations, positive and negative valuations (chores) and allocation with constraints.
+
+In terms of MMS, as is the most relevant for this report, it is found that an MMS allocation may not always exist for indivisible goods \cite{2-3-mms}. It is also found that for Additive valuations and a constant number of agents, a 2/3MMS allocation can always be found \cite{2-3-mms} in polynomial time. Further a number of algorithm with varying approximate MMS-guarantees have been proprosed. The highest guarantee as of yet is $\frac{3}{4}+\frac{1}{12n}$ \cite{best-mms}.
+
+\subsection{Divisible Goods}\label{subsec:divisible-goods}
+Commonly considered a "simpler" allocation problem, the problem of divisible goods has also been thoroughly researched. For these instances notions such as envy-freeness isn't as applicable. Most of this research is focusing on achieving proportional division of cakes.
+
+
+
+
+\subsection{Mixed Goods}\label{subsec:mixed-goods}
+For mixed goods the research has not yet reached the stage where all areas are thoroughly covered. There have however been minor previews of different aspects of mixed instances in various article. Most notable is \cite{mixed-goods}, which proposes the envy-freeness notion of EFM (Envy-Freeness Mixed). In the context of mixed resource\cite{mixed-resources}, instances where the cake can be negatively valued was examined. A similar instance is also examined in \cite{mixed-manna}. The article i will base most of my experimentation and that i take my algorithm from is the article of MaxiMin Fairness for Mixed Goods \cite{mms}, this article also explain how and when an MMS-allocation is guaranteed to exist for a mixed instance.
+
+
+
+
+
+
+
+
+
+
+
+In general both the research and the results for indivisible and divisible goods are well established. Finding a way to connect mixed goods to these instances will then greatly increase the understanding of the problem.

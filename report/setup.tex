@@ -2,20 +2,20 @@
 \usepackage[english]{babel} % Language
 \usepackage[b5paper]{geometry} % size and margins
 \usepackage{etoolbox} % patching and customizing commands
-\usepackage{graphicx} % figures
+\usepackage{graphicx} % figures and adjustments
 \usepackage{titling} % titlingpage
 \usepackage{pdfpages} % insert pdf documents
 \usepackage{float} % float placement
 \usepackage{enumitem} % style lists
 \usepackage{amsmath} % math equations, alignment etc.
+\usepackage{amssymb} % Math symbols
 \usepackage{minted} % code
 \usepackage{algorithm} % algorithms
 \usepackage{algpseudocode} % pseudo code standard
 \usepackage{tikz} % graph drawing
 \usepackage{hyperref} % enable links
-
-\usepackage{lineno}
-\linenumbers
+\usepackage{bm} % bold in math mode
+\usepackage{mathrsfs} % math fonts
 
 % autoref Names
 \addto\extrasenglish{
@@ -57,7 +57,7 @@ array/.style={matrix of nodes,nodes={draw,scale=1,minimum size=7mm,font=\Large},
 \hypersetup{
     colorlinks,
     linkcolor=black,
-    citecolor=black,
+    citecolor=blue,
     filecolor=black,
     urlcolor=blue
 }
@@ -77,6 +77,9 @@ array/.style={matrix of nodes,nodes={draw,scale=1,minimum size=7mm,font=\Large},
 \AtBeginDocument{\floatplacement{equation}{H}}
 \AtBeginDocument{\floatplacement{listing}{H}}
 \AtBeginDocument{\floatplacement{algorithm}{H}}
+
+% Math Alphabet for special charcaters
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 
 % Listing numbering to [Chapter].[Listing]
 \makeatletter

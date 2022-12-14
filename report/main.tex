@@ -1,5 +1,5 @@
 \input{setup.tex}
-\graphicspath{{./assets/figures/}}
+\graphicspath{{../code/results/plots/}}
 \begin{document}
 
 
@@ -16,21 +16,21 @@
 \end{titlingpage}
 
 \frontmatter
-\include{content/front/Preface}
-\include{content/front/Abstract}
-\include{content/front/Contribution}
+\include{content/FrontMatter/Preface}
+\include{content/FrontMatter/Abstract}
+\include{content/FrontMatter/Contribution}
 
 % Contents
 \tableofcontents
-\listoffigures
-\listoftables
-\listofalgorithms
+% \listoffigures
+% \listoftables
+% \listofalgorithms
 
 \mainmatter
-\include{content/main/Introduction/Introduction}
-\include{content/main/Method/Method}
-\include{content/main/Results/Results}
-\include{content/main/Conclusion/Conclusion}
+\include{content/Introduction/Introduction}
+\include{content/Method/Method}
+\include{content/Results/Results}
+\include{content/Conclusion/Conclusion}
 
 \bibliography{refs} % Entries are in the refs.bib file
 

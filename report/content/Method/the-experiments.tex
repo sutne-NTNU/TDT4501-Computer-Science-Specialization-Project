@@ -1,0 +1,19 @@
+\section{The Experiments}\label{sec:the-experiments}
+
+
+As described in \autoref{sec:choosing-algorithms} we will compare the algorithms using their lowest achieved MMS value. This will allow us to verify if and when the algorithms are able to maintain their MMS guarantee.
+
+The following method will be used to compare and analyse the algorithms. A large collection of randomly created instances is generated according to \autoref{subsec:instances}. Each of the algorithms will then be tasked with allocating these goods. This way we are sure that the algorithm have the exact same instance to work with, so a significant difference/distribution for one algorithm gives an indication that one algorithm might be better than the others. Of course since the algorithms are targeting $\halfMMS$, a result where one algorithm is better than the other does not necessarily mean that the algorithm is better. The mixed algorithm for instance essentially stops allocating goods fairly once the guarantee is reached, and might therefore actually be able to achieve a higher minimum MMS value by replacing the bag filling with a more complex algorithm. In addition to the MMS, the algorithms will also be compared in regards to the time they use to find their allocation.
+
+
+\subsection{Instances}\label{subsec:instances}
+When testing the algorithms they will be compared using the exact same instances. Each instance is generated randomly, that is each agents valuations are created randomly in the range $[0,1]$ while following the requirements for the different cake sizes described in \autoref{subsubsec:individual-cake}. For the results desscribed in this project, each plot has 10 000 individual instances. The instances are generated using the following parameters:
+\begin{itemize}
+    \item Number of agents: $\sNumAgents=4$
+    \item Number of Goods: $\sNumGoods=8$
+          \begin{itemize}
+              \item[-] Number of cakes: $\sNumCakes=1$
+              \item[-] Number of items: $\sNumItems=\sNumGoods-\sNumCakes=7$
+          \end{itemize}
+\end{itemize}
+This number of agents and goods were chosen as they gave a good balance between their complexity and the time it took to run the algorithms. During experimentation other combinations of agents and goods were also tested, these tests are explained in \autoref{subsec:other-experiments}.
