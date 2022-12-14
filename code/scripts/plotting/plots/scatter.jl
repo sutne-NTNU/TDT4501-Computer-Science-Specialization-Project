@@ -10,7 +10,7 @@ function plot_mms_scatter_comparison(x, xlabel::String, y, ylabel::String)
         markersize=1.5,
         markerstrokewidth=0.1,
         alpha=1.0,
-        label="MMS",
+        label="Achieved MMS",
         legend=:topleft,
         aspect_ratio=:equal,
         xlims=(0, 2),
